@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: garbage-collect
+  namespace: work-teamcity
+spec:
+  #          min hr dom mon dow
+  schedule: "0   0  *   *   *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          serviceAccountName: teamcity
+          containers:
+          - env:
+              - name: NAMESPACE
+                value: "work-teamcity"
+              - name: AGE
+                value: "168"
+            name: gc
+            image: opless/kube-gc:latest
+            command: ["/bin/bash","-ex","gc.sh"]
+      backoffLimit: 4
+      ttlSecondsAfterFinished: 0
