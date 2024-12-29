@@ -8,7 +8,7 @@ Teamcity's agentless kubernetes integration does not appear to tidy up after its
 Which makes sense, as you may want to examine the pods, or logs if something has gone wrong.
 However, automating deletion makes sense.
 
-At least jetbrains decide to implement their own deletion policies
+At least until Jetbrains decide to implement their own deletion policies
 
 # Usage
 
